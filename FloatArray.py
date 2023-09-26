@@ -24,7 +24,7 @@ class FloatArray:
         return repr(self._float_array)
 
     ############################################################
-    def _checkBounds(self, index: int, using_get: bool) -> None:
+    def _checkBounds(self, index: int, using_get: bool = True) -> None:
         ''' private method to encapsulate checking index bounds
         Parameters:
             index: integer index (into list) that is being checked
@@ -33,14 +33,18 @@ class FloatArray:
         Raises:
             IndexError exception if the given index is invalid
         '''
-        # https://docs.python.org/3/library/exceptions.html
         size = len(self)
         opt = "get" if using_get else "put"
         msg = f"invalid {opt} index {index} for array of size {size}"
+        # https://docs.python.org/3/library/exceptions.html
         if using_get:
+            # for gets, must be a non-empty list and index must be in
+            # the bounds of a valid list index
             if size == 0 or not (0 <= index < size):
                 raise IndexError(msg)
         else:
+            # for puts, index must be between 0 and list size (both
+            # inclusive), as list size corresponds to an append (see specs)
             if index < 0 or index > size:
                 raise IndexError(msg)
 
@@ -71,25 +75,8 @@ class FloatArray:
         '''
         # updated code goes below;
         # make sure to use the "private" _checkBounds method defined above
-        # (see putAt method for an example)
-        pass
-
-    ############################################################
-    def __setitem__(self, index: int, value: float) -> None:
-        ''' if index is size-legitimate, put the float value at that index;
-            otherwise, append the float value to the end of the list 
-        Parameters:
-            index: the integer index passed to [], i.e., where to put the value
-            value: a float
-        Raises:
-            ValueError if value is not float
-        '''
-        if not isinstance(value, float ):
-            raise ValueError(f"invalid type {type(value)} to putAt")
-
-        # updated code goes below;
-        # use the private _checkBounds method, and handle both possible
-        # cases discussed in the docstring
+        # (see putAt method for an example, paying attention to the 2nd parameter)
+        # before fetching and returning
         pass
 
     ############################################################
@@ -110,15 +97,39 @@ class FloatArray:
             # item is one of IntegerArray, CharArray, or BoolArray
             array = item
             if isinstance(array, IntegerArray.IntegerArray):
-                # updated code goes below
+                # updated code goes below -- iterate the integer array, converting
+                # each to a bool and then append
                 pass
             elif isinstance(array, CharArray.CharArray):
-                # updated code goes below
+                # updated code goes below -- iterate the char array, converting
+                # each to an integer using the char class .ord() method,
+                # and then append
                 pass
             elif isinstance(array, BoolArray.BoolArray):
+                # updated code goes below -- iterate the bool array, converting
+                # each to an integer and then append
                 pass
             else:
                 raise ValueError(f"invalid type {type(array)} to append")
+
+    ############################################################
+    def __setitem__(self, index: int, value: float) -> None:
+        ''' if index is size-legitimate, put the float value at that index;
+            otherwise, append the float value to the end of the list 
+        Parameters:
+            index: the integer index passed to [], i.e., where to put the value
+            value: a float
+        Raises:
+            ValueError if value is not float
+        '''
+        if not isinstance(value, float ):
+            raise ValueError(f"invalid type {type(value)} to putAt")
+
+        # updated code goes below;
+        # use the private _checkBounds method (paying attention to the 2nd
+        # parameter), and handle both possible cases discussed in the docstring
+        # (a try/except is a good choice here...)
+        pass
 
     ############################################################
     def putAt(self, value: float, index: int) -> None:
@@ -139,7 +150,7 @@ class FloatArray:
         if not isinstance(value, float):
             raise ValueError(f"invalid type {type(value)} to putAt")
 
-        # updated code goes below
+        # updated code goes below -- can be done in one line using slicing
         pass
 
 

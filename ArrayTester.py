@@ -28,6 +28,7 @@ def printTest(test_string: str, result: int | float | char | bool | str | None,
 
 ################################################################################
 def main() -> None:
+    '''  # uncomment when ready to test CharArray class
     # test CharArray
     char_array1 = CharArray.CharArray()
 
@@ -74,9 +75,11 @@ def main() -> None:
 
 
     print('-' * 70)
+    '''
 
     #################################################################
 
+    '''  # uncomment when ready to test IntegerArray class
     # test IntegerArray
     int_array1 = IntegerArray.IntegerArray()
 
@@ -123,9 +126,11 @@ def main() -> None:
         printTest(f"int_array1.putAt({repr(value)}, {index})", str(err), 'INCORRECT EXCEPTION: EXPECTED VALUE ERROR', True)
 
     print('-' * 70)
+    '''
 
     #################################################################
 
+    '''  # uncomment when ready to test FloatArray class
     # test FloatArray
     float_array1 = FloatArray.FloatArray()
 
@@ -172,9 +177,11 @@ def main() -> None:
         printTest(f"float_array1.putAt({repr(value)}, {index})", str(err), 'INCORRECT EXCEPTION: EXPECTED VALUE ERROR', True)
 
     print('-' * 70)
+    '''
 
     #################################################################
 
+    '''  # uncomment when ready to test BoolArray class
     # test BoolArray
     bool_array1 = BoolArray.BoolArray()
 
@@ -221,6 +228,7 @@ def main() -> None:
         printTest(f"bool_array1.putAt({repr(value)}, {index})", str(err), 'INCORRECT EXCEPTION: EXPECTED VALUE ERROR', True)
 
     print('-' * 70)
+    '''
 
     #################################################################
 
@@ -239,13 +247,15 @@ def main() -> None:
     expected = str([chr(int(float_array1[i])) for i in range(len(float_array1))]).replace(' ', '')
     printTest(f"char_array3.append(float_array1)", result, expected)
 
-    # add a test for appending bool array
+    ###################################################
+    # add a test for appending bool array, if team of 4
+    ###################################################
 
     print()
     '''
 
     '''
-    ## test appends for CharArray
+    ## test appends for IntegerArray
     ## UNCOMMENT THIS AFTER .append* methods implemented
     int_array2 = IntegerArray.IntegerArray()
     int_array2.append(char_array1)
@@ -259,7 +269,9 @@ def main() -> None:
     expected = str([int(float_array1[i]) for i in range(len(float_array1))]).replace(' ', '')
     printTest(f"int_array3.append(float_array1)", result, expected)
 
-    # add a test for appending bool array
+    ###################################################
+    # add a test for appending bool array, if team of 4
+    ###################################################
 
     print()
     '''
@@ -279,7 +291,32 @@ def main() -> None:
     expected = str([float(int_array1[i]) for i in range(len(int_array1))]).replace(' ', '')
     printTest(f"float_array3.append(int_array1)", result, expected)
 
-    # add a test for appending bool array
+    ###################################################
+    # add a test for appending bool array, if team of 4
+    ###################################################
+    '''
+
+    '''
+    ## test appends for BoolArray
+    ## UNCOMMENT THIS AFTER .append* methods implemented
+    bool_array2 = BoolArray.BoolArray()
+    bool_array2.append(char_array1)
+    result = bool_array2.__str__()
+    expected = str([bool(char_array1[i].ord()) for i in range(len(char_array1))]).replace(' ', '')
+    printTest(f"bool_array2.append(char_array1)", result, expected)
+
+    bool_array3 = BoolArray.BoolArray()
+    bool_array3.append(int_array1)
+    result = bool_array3.__str__()
+    expected = str([bool(int_array1[i]) for i in range(len(int_array1))]).replace(' ', '')
+    printTest(f"bool_array3.append(int_array1)", result, expected)
+
+    bool_array4 = BoolArray.BoolArray()
+    bool_array4.append(float_array1)
+    result = bool_array4.__str__()
+    expected = str([bool(float_array1[i]) for i in range(len(float_array1))]).replace(' ', '')
+    printTest(f"bool_array4.append(float_array1)", result, expected)
+
     '''
 
 if __name__ == "__main__":

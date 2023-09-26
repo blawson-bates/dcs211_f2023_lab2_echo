@@ -24,7 +24,7 @@ class IntegerArray:
         return repr(self._integer_array)
 
     ############################################################
-    def _checkBounds(self, index: int, using_get: bool) -> None:
+    def _checkBounds(self, index: int, using_get: bool = True) -> None:
         ''' private method to encapsulate checking index bounds
         Parameters:
             index: integer index (into list) that is being checked
@@ -38,9 +38,13 @@ class IntegerArray:
         msg = f"invalid {opt} index {index} for array of size {size}"
         # https://docs.python.org/3/library/exceptions.html
         if using_get:
+            # for gets, must be a non-empty list and index must be in
+            # the bounds of a valid list index
             if size == 0 or not (0 <= index < size):
                 raise IndexError(msg)
         else:
+            # for puts, index must be between 0 and list size (both
+            # inclusive), as list size corresponds to an append (see specs)
             if index < 0 or index > size:
                 raise IndexError(msg)
 
@@ -71,7 +75,8 @@ class IntegerArray:
         '''
         # updated code goes below;
         # make sure to use the "private" _checkBounds method defined above
-        # (see putAt method for an example)
+        # (see putAt method for an example, paying attention to the 2nd parameter)
+        # before fetching and returning
         pass
 
     ############################################################
@@ -92,13 +97,17 @@ class IntegerArray:
             # item is one of FloatArray, CharArray, or BoolArray
             array = item
             if isinstance(array, FloatArray.FloatArray):
-                # updated code goes below
+                # updated code goes below -- iterate the float array, converting
+                # each to an integer and then append
                 pass
             elif isinstance(array, CharArray.CharArray):
-                # updated code goes below
+                # updated code goes below -- iterate the char array, converting
+                # each to an integer using the char class .ord() method,
+                # and then append
                 pass
             elif isinstance(array, BoolArray.BoolArray):
-                # updated code goes below
+                # updated code goes below -- iterate the bool array, converting
+                # each to an integer and then append
                 pass
             else:
                 raise ValueError(f"invalid type {type(array)} to append")
@@ -117,8 +126,9 @@ class IntegerArray:
             raise ValueError(f"invalid type {type(value)} to putAt")
 
         # updated code goes below;
-        # use the private _checkBounds method, and handle both possible
-        # cases discussed in the docstring
+        # use the private _checkBounds method (paying attention to the 2nd
+        # parameter), and handle both possible cases discussed in the docstring
+        # (a try/except is a good choice here...)
         pass
 
     ############################################################
@@ -140,6 +150,6 @@ class IntegerArray:
         if not isinstance(value, int):
             raise ValueError(f"invalid type {type(value)} to putAt")
 
-        # updated code goes below
+        # updated code goes below -- can be done in one line using slicing
         pass
 
