@@ -6,8 +6,8 @@ import FloatArray
 import IntegerArray
 
 ################################################################################
-def printTest(test_string: str, result: int | float | char | bool | str | None,
-              expected: int | float | char | bool | str | None,
+def printTest(test_string: str, result: int or float or char or bool or str or None,
+              expected: int or float or char or bool or str or None,
               is_exception: bool = False) -> None:
     ''' function to wrap up prints for testing
     Args:
@@ -28,7 +28,7 @@ def printTest(test_string: str, result: int | float | char | bool | str | None,
 
 ################################################################################
 def main() -> None:
-    '''  # uncomment when ready to test CharArray class
+      # uncomment when ready to test CharArray class
     # test CharArray
     char_array1 = CharArray.CharArray()
 
@@ -46,7 +46,7 @@ def main() -> None:
         printTest(f"char_array1[{i}]", result = result, expected = char(expected))
 
     # MAKE SURE TO CHANGE THE EXPECTED RESULT HERE!!
-    result = char_array1.__str__(); expected = "!!CHANGE ME!!"
+    result = char_array1.__str__(); expected = "['A','B','C','D','E','F','G','H','%','^']"
     printTest(f"char_array1.__str__()", result = result, expected = expected)
 
     try:
@@ -75,7 +75,7 @@ def main() -> None:
 
 
     print('-' * 70)
-    '''
+    
 
     #################################################################
 

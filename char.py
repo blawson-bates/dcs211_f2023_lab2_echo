@@ -24,7 +24,7 @@
 class char:
     __slots__ = ('_data')
 
-    def __init__(self, c: int | float | str | bool) -> None:
+    def __init__(self, c: int or float or str or bool) -> None:
         if isinstance(c, char):
             self._data : str = str(c)
         elif isinstance(c, (int, float, bool)):

@@ -10,6 +10,8 @@ import IntegerArray
 class CharArray:
     __slots__ = ('_char_array')
 
+    
+
     ############################################################
     def __init__(self) -> None:
         self._char_array : list[char] = []
@@ -60,7 +62,8 @@ class CharArray:
             number of items in the internal char array
         '''
         # updated code goes below
-        pass
+        return len(self._char_array)
+        
 
     ############################################################
     def __getitem__(self, index: int) -> char:
@@ -77,10 +80,15 @@ class CharArray:
         # make sure to use the "private" _checkBounds method defined above
         # (see putAt method for an example, paying attention to the 2nd parameter)
         # before fetching and returning
+
+        self._checkBounds(index, True)
+
+
+        return self._char_array[index]
         pass
 
     ############################################################
-    def append(self, item: char | IntegerArray | FloatArray | BoolArray) -> None:
+    def append(self, item: char or IntegerArray or FloatArray or BoolArray) -> None:
         ''' method to allow appending to a CharArray
         Parameters:
             item: either an individual char to append; or an object of
@@ -92,7 +100,8 @@ class CharArray:
         '''
         if isinstance(item, char):
             # updated code goes below
-            pass
+            self._char_array.append(item)
+        
         elif isinstance(item, str):
             # giving you this code -- converts str to char before appending
             self._char_array.append(char(item))
@@ -102,14 +111,24 @@ class CharArray:
             if isinstance(array, IntegerArray.IntegerArray):
                 # updated code goes below -- iterate the integer array, converting
                 # each to a char (see above) and then append
+                #[self._char_array.append(char(i)) for i in array]
+
+                for i in array:
+                    self._char_array.append(char(i)) ###update rest of fucniotns
+
+                    
                 pass
             elif isinstance(array, FloatArray.FloatArray):
                 # updated code goes below -- iterate the float array, converting
                 # each to a char (see above) and then append
+                for i in array:
+                    self._char_array.append(char(i))
                 pass
             elif isinstance(array, BoolArray.BoolArray):
                 # updated code goes below -- iterate the bool array, converting
                 # each to a char (see above) and then append
+                for i in array:
+                    self._char_array.append(char(i))
                 pass
             else:
                 raise ValueError(f"invalid type {type(array)} to append")
@@ -127,6 +146,24 @@ class CharArray:
         '''
         if not isinstance(value, char ):
             raise ValueError(f"invalid type {type(value)} to putAt")
+        
+
+
+        
+        #if 0 <= index <= self._char_array().__len__():
+         #   self._char_array[index]
+        
+      #  else:
+       #     self._char_array.append(index)
+
+        try:
+            self._checkBounds(index, False)
+            self._char_array[index] == value
+
+        except:
+            self._char_array.append(value)
+
+
 
         # updated code goes below;
         # use the private _checkBounds method (paying attention to the 2nd
@@ -152,8 +189,14 @@ class CharArray:
         self._checkBounds(index, False)
         if not isinstance(value, char):
             raise ValueError(f"invalid type {type(value)} to putAt")
+        
+        self._char_array = self._char_array[0:index] + [value] + self._char_array[index:]
+        
+
 
         # updated code goes below -- can be done in one line using slicing
+
+
         pass
 
 
