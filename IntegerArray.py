@@ -59,8 +59,13 @@ class IntegerArray:
         Returns:
             number of items in the internal integer array
         '''
-        # updated code goes below
-        pass
+        count = 0
+        for i in range(len(self._integer_array)):
+            count +=1
+        return count
+            
+        
+
 
     ############################################################
     def __getitem__(self, index: int) -> int:
@@ -77,7 +82,8 @@ class IntegerArray:
         # make sure to use the "private" _checkBounds method defined above
         # (see putAt method for an example, paying attention to the 2nd parameter)
         # before fetching and returning
-        pass
+        self._checkBounds(index)
+        return self._integer_array[index]
 
     ############################################################
     def append(self, item: int | FloatArray | CharArray | BoolArray) -> None:
@@ -92,23 +98,29 @@ class IntegerArray:
         '''
         if isinstance(item, int):
             # updated code goes below
-            pass
+            self._integer_array.append(item)
+
         else:
             # item is one of FloatArray, CharArray, or BoolArray
             array = item
             if isinstance(array, FloatArray.FloatArray):
                 # updated code goes below -- iterate the float array, converting
                 # each to an integer and then append
-                pass
+               for i in array:
+                   self._integer_array.append(int(i))
+                    
             elif isinstance(array, CharArray.CharArray):
                 # updated code goes below -- iterate the char array, converting
                 # each to an integer using the char class .ord() method,
                 # and then append
-                pass
+                for i in array:
+                    self._integer_array.append(ord(i))
             elif isinstance(array, BoolArray.BoolArray):
                 # updated code goes below -- iterate the bool array, converting
                 # each to an integer and then append
-                pass
+                for i in array:
+                    self._integer_array.append(int(i))
+            
             else:
                 raise ValueError(f"invalid type {type(array)} to append")
 
@@ -129,7 +141,14 @@ class IntegerArray:
         # use the private _checkBounds method (paying attention to the 2nd
         # parameter), and handle both possible cases discussed in the docstring
         # (a try/except is a good choice here...)
-        pass
+        try:
+            self._checkBounds(index, False)  # Check bounds for setting an item
+
+       # If _checkBounds didn't raise an exception, the index is valid
+            self._integer_array[index] = value  # Put the value at the specified index
+        except IndexError:
+       # Index is out of bounds, so append the value to the end
+            self._integer_array.append(value)
 
     ############################################################
     def putAt(self, value: int, index: int) -> None:
@@ -151,5 +170,6 @@ class IntegerArray:
             raise ValueError(f"invalid type {type(value)} to putAt")
 
         # updated code goes below -- can be done in one line using slicing
-        pass
+        self._integer_array = self._integer_array[:index] + [value] + self._integer_array[index:]
+
 
