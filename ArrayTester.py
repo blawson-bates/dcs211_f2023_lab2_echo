@@ -130,7 +130,7 @@ def main() -> None:
 
     #################################################################
 
-    '''  # uncomment when ready to test FloatArray class
+    # uncomment when ready to test FloatArray class
     # test FloatArray
     float_array1 = FloatArray.FloatArray()
 
@@ -140,16 +140,16 @@ def main() -> None:
     float_array1.putAt(ord('!') + 0.25, 8)
 
     result = len(float_array1);  expected = 10
-    printTest("len(float_array1)", result = result, expected = expected)
+    printTest("len(float_array1)", result = result, expected = expected) #Passed
 
-    expecteds = [float(ord('A')) + 0.25, float(ord('^')) + 0.25, float(ord('!')) + 0.25]
+    expecteds = [float(ord('A')) + 0.25, float(ord('!')) + 0.25, float(ord('^')) + 0.25]
     for i in [0, len(float_array1) - 2, len(float_array1) - 1]:
         result = float_array1[i];  expected = expecteds.pop(0)
         printTest(f"float_array1[{i}]", result = result, expected = expected)
 
     result = float_array1.__str__()
     # MAKE SURE TO CHANGE THE EXPECTED RESULT HERE!!
-    expected = "!!CHANGE ME!!"
+    expected = '[65.25,98.25,99.25,100.25,101.25,102.25,103.25,104.25,33.25,94.25]'
     printTest(f"float_array1.__str__()", result = result, expected = expected)
 
     try:
@@ -177,7 +177,6 @@ def main() -> None:
         printTest(f"float_array1.putAt({repr(value)}, {index})", str(err), 'INCORRECT EXCEPTION: EXPECTED VALUE ERROR', True)
 
     print('-' * 70)
-    '''
 
     #################################################################
 
